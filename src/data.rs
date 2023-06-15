@@ -61,3 +61,8 @@ pub struct RouletteGetResponse {
     pub created_at: String,
     pub result: Option<usize>,
 }
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct RouletteStartRequest {
+    pub secret: String,
+}

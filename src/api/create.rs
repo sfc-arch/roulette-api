@@ -1,5 +1,5 @@
 use chrono::Utc;
-use std::{collections::HashMap, sync::Mutex, time::Instant};
+use std::{collections::HashMap, sync::Mutex};
 use uuid::Uuid;
 
 use actix_web::{
