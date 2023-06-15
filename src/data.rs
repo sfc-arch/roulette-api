@@ -26,6 +26,16 @@ impl Roulette {
             result: None,
         }
     }
+
+    pub fn to_get_response(&self) -> RouletteGetResponse {
+        RouletteGetResponse {
+            id: self.id.clone(),
+            title: self.title.clone(),
+            items: self.items.clone(),
+            created_at: self.created_at.clone(),
+            result: self.result,
+        }
+    }
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
