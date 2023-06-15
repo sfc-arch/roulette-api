@@ -1,11 +1,11 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct RouletteItem {
     pub label: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Roulette {
     pub id: String,
     pub title: String,
@@ -15,13 +15,26 @@ pub struct Roulette {
     pub result: Option<usize>,
 }
 
-#[derive(Serialize, Deserialize)]
+impl Roulette {
+    pub fn from_response(response: RouletteCreateResponse) -> Self {
+        Self {
+            id: response.id,
+            title: response.title,
+            items: response.items,
+            created_at: response.created_at,
+            secret: response.secret,
+            result: None,
+        }
+    }
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct RouletteCreateRequest {
     pub title: String,
     pub items: Vec<RouletteItem>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct RouletteCreateResponse {
     pub id: String,
     pub title: String,
@@ -30,7 +43,7 @@ pub struct RouletteCreateResponse {
     pub secret: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct RouletteGetResponse {
     pub id: String,
     pub title: String,
