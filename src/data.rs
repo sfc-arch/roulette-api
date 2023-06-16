@@ -1,3 +1,4 @@
+use rand::Rng;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -16,6 +17,15 @@ pub struct Roulette {
 }
 
 impl Roulette {
+    pub fn run(&mut self) -> usize {
+        let mut rng = rand::thread_rng();
+        let res = rng.gen_range(0..self.items.len());
+
+        self.result = Some(res);
+
+        res
+    }
+
     pub fn from_response(response: RouletteCreateResponse) -> Self {
         Self {
             id: response.id,

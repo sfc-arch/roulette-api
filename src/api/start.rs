@@ -24,10 +24,12 @@ pub async fn post_start_roulette(
 ) -> impl Responder {
     if let Some(roulette) = roulette_mutex.lock().unwrap().get_mut(&id.to_string()) {
         if roulette.secret == req.0.secret {
+            let r = roulette.run();
+
             event_sender
                 .lock()
                 .unwrap()
-                .send("start", id.to_string())
+                .send(&format!("start {r}"), id.to_string())
                 .await;
 
             HttpResponseBuilder::new(StatusCode::OK)
