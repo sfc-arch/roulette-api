@@ -1,5 +1,6 @@
 mod api;
 mod data;
+mod event_sender;
 
 use std::{
     collections::HashMap,
@@ -7,12 +8,9 @@ use std::{
 };
 
 use actix_web::{web::Data, App, HttpServer};
-use api::{
-    create::create,
-    get::get,
-    sse::{get_sse, post_start_roulette, EventSender},
-};
+use api::{create::create, get::get, sse::get_sse, start::post_start_roulette};
 use data::Roulette;
+use event_sender::EventSender;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
