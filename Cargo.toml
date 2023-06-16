@@ -9,6 +9,7 @@ edition = "2021"
 actix-web = "4"
 actix-rt = "2.8.0"
 actix-web-lab = "0.18.5"
+actix-cors = "0.6.4"
 parking_lot = "0.12.1"
 futures-util = { version = "0.3.25", default-features = false, features = ["std"] }
 serde = { version = "1.0.164", features = ["derive"] }

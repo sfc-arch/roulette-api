@@ -7,6 +7,7 @@ use std::{
     sync::{Arc, Mutex},
 };
 
+use actix_cors::Cors;
 use actix_web::{middleware::Logger, web::Data, App, HttpServer};
 use api::{create::create, get::get, sse::get_sse, start::post_start_roulette};
 use data::Roulette;
@@ -22,8 +23,15 @@ async fn main() -> std::io::Result<()> {
     let sse_mutex: Data<Arc<Mutex<EventSender>>> = Data::new(EventSender::new());
 
     HttpServer::new(move || {
+        let cors = if cfg!(debug_assertions) {
+            Cors::default().allow_any_origin()
+        } else {
+            Cors::default()
+        };
+
         App::new()
             .wrap(Logger::default())
+            .wrap(cors)
             .service(create)
             .service(get)
             .service(get_sse)
