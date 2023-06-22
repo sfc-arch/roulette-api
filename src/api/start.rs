@@ -36,7 +36,7 @@ pub async fn post_start_roulette(
 
             HttpResponseBuilder::new(StatusCode::OK)
                 .content_type("text/plain")
-                .body(format!("{r}"))
+                .body(format!("{}", roulette.items[r].label))
         } else {
             HttpResponseBuilder::new(StatusCode::UNAUTHORIZED)
                 .content_type("text/plain")
