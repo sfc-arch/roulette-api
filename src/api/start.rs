@@ -32,9 +32,11 @@ pub async fn post_start_roulette(
                 .send(&format!("start {r}"), id.to_string())
                 .await;
 
+            roulette.result = Some(r);
+
             HttpResponseBuilder::new(StatusCode::OK)
                 .content_type("text/plain")
-                .body("Ok")
+                .body(format!("{r}"))
         } else {
             HttpResponseBuilder::new(StatusCode::UNAUTHORIZED)
                 .content_type("text/plain")
